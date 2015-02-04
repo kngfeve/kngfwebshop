@@ -7,6 +7,28 @@
 /**
  * App-wide Styles
  */
+@body-bg: #151515;
+@text-color: #dddddd;
+
+@panel-bg: #222222;
+
+@border-radius-base: 3px;
+@panel-default-border: #000;
+
+
+@thumbnail-bg: #151515;
+@thumbnail-border: #000;
+
+//** Default background color used for all tables.
+@table-bg: #222222;
+//** Background color used for `.table-striped`.
+@table-bg-accent: lighten(@table-bg, 5%);
+//** Background color used for `.table-hover`.
+@table-bg-hover: lighten(@table-bg, 15%);
+@table-bg-active: @table-bg-hover;
+
+@table-border-color: #000;
+
 
 .browsehappy {
     margin: 0.2em 0;
@@ -15,9 +37,87 @@
     padding: 0.2em 0;
 }
 
+.hcart{
+  width: 350px;
+  padding: 10px 10px 0px 10px;
+  text-transform: none;
+  background-color: #151515;
+}
+
+/* Product menu CSS
+-------------------------------------------------- */
+
+.productmenu {
+  list-style: none;  
+  padding: 0;
+  margin: 0;  
+}
+
+.productmenu > li:first-child > a {
+border-top-left-radius: 3px;
+border-top-right-radius: 3px;
+}
+
+.productmenu > li:last-child > a {
+border-bottom-left-radius: 3px;
+border-bottom-right-radius: 3px;
+border-bottom: 1px solid #000000;
+}
+
+.productmenu > li > a:hover{
+background: #151515;
+color: #ffffff;
+}
+
+.productmenu > li > a {
+  color: #dddddd;
+  text-transform: uppercase;
+  display: block;
+  padding: 20px;
+  border-top: 1px solid #000000;
+  border-left: 1px solid #000000;
+  border-right: 1px solid #000000;
+  background: #222222;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  letter-spacing: 1px;
+  font-size: 16px;
+  font-weight: 300;
+  position: relative;
+  text-decoration: none;
+  cursor: pointer;  
+}
+
+.productmenu-list {
+  list-style: none;  
+  margin: 0;
+  padding:0;  
+}
+
+.productmenu-list > li:hover > a {
+  background: #e4e4e4;
+  color: #666666;
+}
+
+.productmenu-list > li > a {
+  list-style: none;  
+  background: #f1f1f1;
+  display: block;
+  position: relative;
+  font-size: 15px;
+  padding: 14px 20px;
+  border-bottom: 1px solid #dddddd;
+  color: #777777;
+  font-weight: 300;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  text-decoration: none;    
+}
+
+
 // injector
 @import 'account/login/login.less';
 @import 'admin/admin.less';
 @import 'main/main.less';
 @import 'modal/modal.less';
+@import 'navbar/navbar.less';
 // endinjector

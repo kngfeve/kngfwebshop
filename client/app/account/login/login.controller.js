@@ -4,7 +4,10 @@ angular.module('kngfwebshopApp')
   .controller('LoginCtrl', function ($scope, Auth, $location) {
     $scope.user = {};
     $scope.errors = {};
-
+    $scope.user = {
+      email: 'admin@admin.com',
+      password: 'admin'
+    };
     $scope.login = function(form) {
       $scope.submitted = true;
 

@@ -31,12 +31,12 @@ angular.module('kngfwebshopApp')
     $scope.saveProduct = function(data, id) {
       if(! id){
         dataFactory.create(data);
-        console.log("-created-");     
-      };
+        console.log('-created-');     
+      }
       if(id){
         dataFactory.updateData(id, data);
-        console.log("-updated-");
-      };
+        console.log('-updated-');
+      }
     };
 
     // remove Product
@@ -54,7 +54,7 @@ angular.module('kngfwebshopApp')
           desc: $scope.desc,
       };
       $scope.products.push($scope.inserted);
-      console.log($scope.inserted)
+      console.log($scope.inserted);
     };
     $scope.types = ['Frigate','Cruiser','Battlecruiser','Battleship']; 
     $scope.factions = ['Gallente','Caldari','Amarr','Minmatar'];     

@@ -18,8 +18,8 @@ angular.module('kngfwebshopApp')
 // add selected product & qty to cart
 
     $scope.addToCart = function() {
-      
-    }
+
+    };
 
 
 

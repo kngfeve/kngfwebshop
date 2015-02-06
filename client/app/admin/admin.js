@@ -6,11 +6,19 @@ angular.module('kngfwebshopApp')
       .state('users', {
         url: '/admin/users',
         templateUrl: 'app/admin/users/users.html',
-        controller: 'UsersCtrl'
+        controller: 'UsersCtrl',
+        authenticate: true
       })
       .state('products', {
         url: '/admin/products',
         templateUrl: 'app/admin/products/products.html',
-        controller: 'ProductsCtrl'
-      });
+        controller: 'ProductsCtrl',
+        authenticate: true
+      })
+      .state('eve', {
+        url: '/admin/eve',
+        templateUrl: 'app/admin/eve/eve.html',
+        controller: 'EveCtrl',
+        authenticate: true
+      });      
   });

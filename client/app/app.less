@@ -30,6 +30,12 @@
 
 @table-border-color: #000;
 
+th {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
 .browsehappy {
     margin: 0.2em 0;
@@ -117,7 +123,8 @@ color: #ffffff;
 
 // injector
 @import 'account/login/login.less';
-@import 'admin/admin.less';
+@import 'admin/products/products.less';
+@import 'admin/users/users.less';
 @import 'main/main.less';
 @import 'modal/modal.less';
 @import 'navbar/navbar.less';

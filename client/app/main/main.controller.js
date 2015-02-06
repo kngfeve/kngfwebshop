@@ -2,19 +2,33 @@
 
 angular.module('kngfwebshopApp')
   .controller('MainCtrl', function ($scope, $http, $filter) {
+// array to store products
+    $scope.products = [];
 
-// get all products
+// get all products in KNGFs catalog
     $http.get('/api/products').success(function(products) {
       $scope.products = products;
+      console.log('get products');
+      console.log(products);
     });
 
-    $scope.products = [];
+// array to store products added to cart
     $scope.cart = [];
+
+// add selected product & qty to cart
+
+    $scope.addToCart = function() {
+      
+    }
+
+
+
+
+// controls the collapsation of the menu    
     $scope.isCollapsed = true;
+
+// needed for the sorting filter. see components/productfilter    
     $filter('productfilter');
-
-
-
 
 // crud commands, should require admin powers and be located in the admin panel
     $scope.addProduct = function() {

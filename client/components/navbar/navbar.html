@@ -19,16 +19,20 @@
         </div>
         <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
           <ul class="nav navbar-nav">
-            <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
-                <a ng-href="{{item.link}}">{{item.title}}</a>
+            <li ng-class="{active: isActive('/')}"><a ng-href="/">Home</a></li>
+            <li ng-show="isAdmin()" ng-class="{active: isActive('/admin/')}" class="dropdown" on-toggle="toggled(open)">
+              <a href class="dropdown-toggle">Admin <span class="fa fa-caret-down"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/admin/users"><span class="fa fa-user"></span> Users</a></li>
+                <li><a href="/admin/products"><span class="fa fa-cubes"></span> Products</a></li>
+              </ul>
             </li>
-            <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
             <!--cart dropdown-->
             <li class="dropdown" on-toggle="toggled(open)">
-              <a href class="dropdown-toggle">Cart [0]<span class="caret"></span></a>
+              <a href class="dropdown-toggle"><span class="fa fa-shopping-cartCart"></span> [0]<span class="fa fa-caret-down"></span></a>
               <ul class="dropdown-menu pull-right hcart">
                 <li>
                   <table class="table table-condensed">
@@ -78,7 +82,7 @@
 
             <!-- when logged in -->
             <li ng-show="isLoggedIn()" class="dropdown" on-toggle="toggled(open)">
-              <a href class="dropdown-toggle">Welcome, {{ getCurrentUser().name }} <span class="caret"></span></a>
+              <a href class="dropdown-toggle">Welcome, {{ getCurrentUser().name }} <span class="fa fa-caret-down"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="#myprofile"><span class="fa fa-user"></span> My profile</a></li>
                 <li><a href="/settings"><span class="fa fa-cog"></span> Settings</li>

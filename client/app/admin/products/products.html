@@ -1,0 +1,111 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+	<div class="col-lg-12">
+	  <div class="panel panel-default">
+	    <!-- Default panel contents -->
+	    <div class="panel-heading">Panel heading {{sortType}} {{sortReverse}}</div>
+	    <div class="panel-body">
+	    <table class="table table-bordered table-hover table-striped table-responsive">
+	      <tr style="font-weight: bold">
+	        <th style="width: 5%;" ng-click="sortType = 'id'; sortReverse = !sortReverse">
+	          Id
+	          <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
+	          <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+	        </th>
+	        <th ng-click="sortType = 'name'; sortReverse = !sortReverse">
+	          Name
+	          <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+	          <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+	        </th>
+	        <th ng-click="sortType = 'description'; sortReverse = !sortReverse">Description</th>
+	        <th ng-click="sortType = 'price'; sortReverse = !sortReverse">Price</th>
+	        <th ng-click="sortType = 'stock'; sortReverse = !sortReverse">Stock</th>
+	        <th ng-click="sortType = 'type'; sortReverse = !sortReverse">Type</th>
+	        <th ng-click="sortType = 'faction'; sortReverse = !sortReverse">Faction</th>
+	        <th ng-click="sortType = 'metalevel'; sortReverse = !sortReverse">Metalevel</th>       
+	        <th ng-click="sortType = 'edit'; sortReverse = !sortReverse">Edit</th>
+	      </tr>
+	      <tr ng-repeat="p in products | orderBy:sortType:sortReverse">
+	        <td>
+	          <!-- ID -->
+	          <span editable-text="p.id" e-name="id" e-form="rowform" e-required>
+	            {{ p.id || 'empty' }}
+	          </span>
+	        </td>
+	        <td>
+	          <!-- Name -->
+	          <span editable-text="p.name" e-name="name" e-form="rowform" onbeforesave="checkName($data, p.id)">
+	            {{ p.name || 'empty' }}
+	          </span>
+	        </td>
+	        <td>
+	          <!-- Description -->
+	          <span editable-textarea="p.description" e-rows="2" e-cols="30" e-name="description" e-form="rowform">
+	            {{ p.description || 'empty' }}
+	          </span><br>
+	          <span editable-textarea="p.skillbonus" e-rows="2" e-cols="30" e-name="skillbonus" e-form="rowform">
+	            {{ p.skillbonus || 'empty' }}
+	          </span><br>
+	          <span editable-textarea="p.rolebonus" e-rows="2" e-cols="30" e-name="rolebonus" e-form="rowform">
+	            {{ p.rolebonus || 'empty' }}
+	          </span>            
+	        </td>
+	        <td>
+	          <!-- Price -->
+	          <span editable-number="p.price" e-name="price" e-min="0" e-form="rowform">
+	            {{ p.price | number}} ISK
+	          </span>
+	        </td>
+	        <td>
+	          <!-- Stock -->
+	          <span editable-number="p.stock" e-name="stock" e-form="rowform">
+	            {{ p.stock || 'empty' }}
+	          </span>
+	        </td>
+	        <td>
+	          <!-- Type -->
+	          <span editable-select="p.type" e-ng-options="t as t for t in types" e-name="type" e-form="rowform">
+	            {{ p.type || 'empty' }}
+	          </span>
+	        </td>
+	        <td>
+	          <!-- Faction -->
+	          <span editable-select="p.faction" e-ng-options="f as f for f in factions" e-name="faction" e-form="rowform" onbeforesave="checkName($data, p.id)">
+	            {{ p.faction || 'empty' }}
+	          </span>
+	        </td>
+	        <td>
+	          <!-- Metalevel -->
+	          <span editable-range="p.metalevel" e-step="1" e-min="0" e-max="5" e-name="metalevel" e-form="rowform">
+	            {{ p.metalevel || 'empty' }}
+	          </span>
+	        </td>            
+	        <td style="white-space: nowrap">
+	          <!-- form -->
+	          <form editable-form name="rowform" onbeforesave="saveProduct(p, p._id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == p">
+	            <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+	              save
+	            </button>
+	            <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+	              cancel
+	            </button>
+	          </form>
+	          <div class="buttons" ng-show="!rowform.$visible">
+	            <button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
+	            <button class="btn btn-danger" ng-click="deleteProduct(p._id, $index)">del</button>
+	          </div>  
+	        </td>
+	      </tr>
+	    </table>
+	    <div class="pull-right">
+	      <button class="btn btn-default" ng-click="addProduct()">Add row</button>
+	    </div>  
+	    </div>
+
+	    <!-- Table -->
+
+	  
+	  </div>
+  </div>
+</div>

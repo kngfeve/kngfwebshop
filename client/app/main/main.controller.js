@@ -2,13 +2,21 @@
 
 angular.module('kngfwebshopApp')
   .controller('MainCtrl', function ($scope, $http, $filter) {
-    $scope.products = [];
-    $scope.isCollapsed = true;
-    $filter('productfilter');
+
+// get all products
     $http.get('/api/products').success(function(products) {
       $scope.products = products;
     });
 
+    $scope.products = [];
+    $scope.cart = [];
+    $scope.isCollapsed = true;
+    $filter('productfilter');
+
+
+
+
+// crud commands, should require admin powers and be located in the admin panel
     $scope.addProduct = function() {
       if($scope.newProduct === '') {
         return;
@@ -20,6 +28,8 @@ angular.module('kngfwebshopApp')
     $scope.deleteProduct = function(product) {
       $http.delete('/api/products/' + product._id);
     };
+
+// mock categories - move to database once admin panel is done.    
     $scope.categories = [
       {
         'category':'Frigates',

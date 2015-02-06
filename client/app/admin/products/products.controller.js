@@ -2,13 +2,10 @@
 
 angular.module('kngfwebshopApp')
   .controller('ProductsCtrl', function($scope, $http, Auth, User, productFactory) {
-
-    // container for products
-    $scope.products = [];
-
     productFactory.getProducts().then(function(data) {
       $scope.products = data.data;
-    });  
+    });
+
     $scope.saveProduct = function(data, id) {
       if(! id){
         productFactory.create(data);

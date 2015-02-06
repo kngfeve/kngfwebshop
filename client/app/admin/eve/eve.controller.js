@@ -4,30 +4,40 @@ angular.module('kngfwebshopApp')
   .controller('EveCtrl', function($scope, $http, Auth, User, productFactory) {  
 
     $scope.eveitems = [];
-    $scope.name = 'megathron'; 
+    $scope.name = '641'; 
 
     var SDD = EVEoj.SDD.Create('json', {'path': 'http://cf.xyjax.com/sdd/109013'});
     SDD.LoadMeta()
       .then(function(arg){
-          arg.source.GetTable('invTypes').Load().then(my_load_done_handler);
+          arg.source.GetTable('eveUnits').Load();
+          $scope.sdd = arg.source;
+          console.log($scope.sdd)
       });
-    function my_load_done_handler(arg) {
-      var name = $scope.name,
-          rxp = new RegExp('^' + name, 'i'),
-          tbl = arg.table,
-          results;
 
-      results = _.filter(tbl.data, function(entry) {
-          if (rxp.test(entry[tbl.c.typeName])) return true;
-          return false;
-      });
-      _.each(results, function(val, key, list) {
-          var typeName = val[tbl.c.typeName],
-              typeID = val[tbl.c.typeID];
-    
+    $scope.update = function() {
+      console.log($scope.sdd.GetTable('invTypes'))
+      var tbl = $scope.sdd.GetTable('invTypes');
+      console.log(tbl.c); 
           // do something with typeName and typeID
-          $scope.eveitems.push({name: typeName, id: typeID});
-          $scope.$apply() 
-      });      
-    }
+      console.log(tbl.data[$scope.name][tbl.c.typeID]);
+      console.log(tbl.data[$scope.name][tbl.c.typeName]);
+      console.log(tbl.data[$scope.name][tbl.c.raceID]);
+      var typeName = tbl.data[$scope.name][tbl.c.typeName],
+          typeID = tbl.data[$scope.name][tbl.c.typeID],
+          raceID = tbl.data[$scope.name][tbl.c.raceID];
+
+
+
+
+      $scope.eveitems.push({name: typeName, id: typeID, race: raceID});
+// race id:
+// race id [1] = caldari
+// race id [2] = minmatar
+// race id [4] = amarr
+// race id [8] = Gallente
+            
+    };
+
+
+
   });

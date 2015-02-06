@@ -9,12 +9,12 @@ angular.module('kngfwebshopApp')
     $scope.saveProduct = function(data, id) {
       if(! id){
         productFactory.create(data);
-        console.log("-created-");     
-      };
+        console.log('-created-');     
+      }
       if(id){
         productFactory.updateData(id, data);
-        console.log("-updated-");
-      };
+        console.log('-updated-');
+      }
     };
 
     // remove Product
@@ -32,7 +32,7 @@ angular.module('kngfwebshopApp')
           desc: $scope.desc,
       };
       $scope.products.push($scope.inserted);
-      console.log($scope.inserted)
+      console.log($scope.inserted);
     };
 
     $scope.sortReverse = false;

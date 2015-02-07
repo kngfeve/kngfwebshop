@@ -9,9 +9,9 @@ angular.module('kngfwebshopApp')
     var SDD = EVEoj.SDD.Create('json', {'path': 'http://cf.xyjax.com/sdd/109013'});
     SDD.LoadMeta()
       .then(function(arg){
-          arg.source.GetTable('eveUnits').Load();
+          arg.source.GetTable('invTypes').Load();
           $scope.sdd = arg.source;
-          //console.log($scope.sdd);
+          console.log($scope.sdd);
       });
 
     $scope.update = function() {

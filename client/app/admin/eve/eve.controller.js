@@ -17,11 +17,11 @@ angular.module('kngfwebshopApp')
     $scope.update = function() {
       //console.log($scope.sdd.GetTable('invTypes'))
       var tbl = $scope.sdd.GetTable('invTypes');
-      //console.log(tbl.c); 
+      console.log(tbl.c); 
           // do something with typeName and typeID
-      //console.log(tbl.data[$scope.name][tbl.c.typeID]);
-      //console.log(tbl.data[$scope.name][tbl.c.typeName]);
-      //console.log(tbl.data[$scope.name][tbl.c.raceID]);
+      console.log(tbl.data[$scope.name][tbl.c.typeID]);
+      console.log(tbl.data[$scope.name][tbl.c.typeName]);
+      console.log(tbl.data[$scope.name][tbl.c.raceID]);
       var typeName = tbl.data[$scope.name][tbl.c.typeName],
           typeID = tbl.data[$scope.name][tbl.c.typeID],
           raceID = tbl.data[$scope.name][tbl.c.raceID];

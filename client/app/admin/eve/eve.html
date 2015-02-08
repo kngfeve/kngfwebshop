@@ -10,7 +10,7 @@
 		      <div class="form-group">
 		        <div class="input-group">
 		          <div class="input-group-addon"><i class="fa fa-search"></i></div>
-		          <input type="text" class="form-control" placeholder="Search" ng-model="name">
+		          <input type="text" class="form-control" placeholder="Search" ng-model="name" min="582" max="672">
 		        </div>      
 		      </div>
 		    </form>
@@ -19,16 +19,47 @@
 
 	    <!-- Table -->
 		<table class="table table-condensed">
+			<tr>
+				<th>ID</th>
+				<th>group</th>
+				<th>icon</th>
+				<th>Name</th>
+				<th>portionSize</th>
+				<th>race</th>
+				<th>marketGroupID</th>
+				<th>Materials</th>
+			</tr>
 			<tr ng-repeat="eveitem in eveitems">
 				<td>
-					{{eveitem.name}}
+					{{eveitem.typeID}}
 				</td>
 				<td>
-					{{eveitem.id}}
+					{{eveitem.groupID}}
 				</td>
 				<td>
-					{{eveitem.race}}
-				</td>				
+					<img class="img-responsive" ng-src="https://image.eveonline.com/Render/{{eveitem.typeID}}_128.png" title="{{eveitem.typeName}}">
+				</td>
+				<td>
+					{{eveitem.typeName}}
+				</td>
+				<td>
+					{{eveitem.portionSize}}
+				</td>
+				<td>
+					{{eveitem.raceID}}
+				</td>
+				<td>
+					{{eveitem.marketGroupID}}
+				</td>
+				<td>
+			    <ul class="list-group">
+		        <li class="list-group-item" style="color: black;" ng-repeat="material in eveitem.materials">
+		        	<img ng-src="https://image.eveonline.com/Type/{{material.materialTypeID}}_32.png" title="{{material.materialTypeName}}">
+		        	{{material.quantity | number}}
+	        	</li>
+			    </ul>
+					
+				</td>						
 			</tr>
 		</table>
 	  </div>

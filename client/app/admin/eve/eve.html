@@ -16,52 +16,45 @@
 		    </form>
 		    <button class="btn btn-default" ng-click="update()">update</button>
 	    </div>
-
-	    <!-- Table -->
-		<table class="table table-condensed">
-			<tr>
-				<th>ID</th>
-				<th>group</th>
-				<th>icon</th>
-				<th>Name</th>
-				<th>portionSize</th>
-				<th>race</th>
-				<th>marketGroupID</th>
-				<th>Materials</th>
-			</tr>
-			<tr ng-repeat="eveitem in eveitems">
-				<td>
-					{{eveitem.typeID}}
-				</td>
-				<td>
-					{{eveitem.groupID}}
-				</td>
-				<td>
-					<img class="img-responsive" ng-src="https://image.eveonline.com/Render/{{eveitem.typeID}}_128.png" title="{{eveitem.typeName}}">
-				</td>
-				<td>
-					{{eveitem.typeName}}
-				</td>
-				<td>
-					{{eveitem.portionSize}}
-				</td>
-				<td>
-					{{eveitem.raceID}}
-				</td>
-				<td>
-					{{eveitem.marketGroupID}}
-				</td>
-				<td>
-			    <ul class="list-group">
-		        <li class="list-group-item" style="color: black;" ng-repeat="material in eveitem.materials">
-		        	<img ng-src="https://image.eveonline.com/Type/{{material.materialTypeID}}_32.png" title="{{material.materialTypeName}}">
-		        	{{material.quantity | number}}
-	        	</li>
-			    </ul>
-					
-				</td>						
-			</tr>
-		</table>
+    <!-- Table -->
+			<div class="container-fluid">
+				  <accordion close-others="oneAtATime">
+				    <accordion-group is-disabled="true">
+				    	<accordion-heading>
+						    <div class="row">
+						        <div class="col-xs-2">ID</div>
+						        <div class="col-xs-2">Group</div>
+						        <div class="col-xs-2">Name</div>
+						        <div class="col-xs-2">Race</div>
+						        <div class="col-xs-2">Marketgroup</div>
+						    </div>
+				      </accordion-heading>
+				    </accordion-group>				  
+				    <accordion-group is-open="status.open" ng-repeat="eveitem in eveitems">
+			        <accordion-heading>
+			        	<div class="row">
+					        <div class="col-xs-2">{{eveitem.typeID}}</div>
+					        <div class="col-xs-2">{{eveitem.groupID}}</div>
+					        <div class="col-xs-2">{{eveitem.typeName}}</div>
+					        <div class="col-xs-2">{{eveitem.raceID}}</div>
+					        <div class="col-xs-2">{{eveitem.marketGroupID}}</div>
+					        <div class="col-xs-2"><span class="pull-right glyphicon" ng-class="{'fa fa-caret-down': status.open, 'fa fa-caret-down fa-rotate-90': !status.open}"></span>
+		        			</div>
+	        			</div>
+			        </accordion-heading>
+			        <div class="col-xs-8">
+								<img class="img-responsive img-thumbnail" ng-src="https://image.eveonline.com/Render/{{eveitem.typeID}}_128.png" title="{{eveitem.typeName}}">
+								<p>{{eveitem.invTypesDesc}}</p>
+							</div>
+					    <ul class="list-group col-xs-4">					    	
+				        <li class="list-group-item" style="color: black;" ng-repeat="material in eveitem.materials">
+			        		<img ng-src="https://image.eveonline.com/Type/{{material.materialTypeID}}_32.png" title="{{material.materialTypeName}}">
+				        	{{material.quantity | number}}
+			        	</li>
+					    </ul>
+				    </accordion-group>
+				  </accordion>
+			</div>
 	  </div>
   </div>
 </div>

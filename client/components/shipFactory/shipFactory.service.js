@@ -10,17 +10,6 @@ angular.module('kngfwebshopApp')
       console.log('_shipFactory.getProducts');
 
 
-
-
-
-
-
-
-
-
-
-
-
       return $http.get('/api/products'); //return products
     }; // getproducts
        

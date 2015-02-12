@@ -6,6 +6,11 @@ angular.module('kngfwebshopApp')
       .state('main', {
         url: '/',
         templateUrl: 'app/main/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
+      	resolve: {
+  	        cartPromise: ['cartFactory', function(cartFactory){
+  	            return cartFactory.getData(), cartFactory.calcTotal(); 
+  	        }]
+  	    }
       });
   });

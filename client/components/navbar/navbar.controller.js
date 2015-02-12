@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('kngfwebshopApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth) {
+  .controller('NavbarCtrl', function($scope, $location, Auth, cartFactory) {
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
@@ -16,8 +16,16 @@ angular.module('kngfwebshopApp')
       Auth.logout();
       $location.path('/login');
     };
-
+    
     $scope.isActive = function(route) {
       return route === $location.path();
     };
+    $scope.removeItem = function(id) {
+      cartFactory.removeItem(id);
+      cartFactory.getData();
+      cartFactory.calcTotal();
+      console.log('finished')
+    };
+    $scope.shipCart = cartFactory.cart;
+    $scope.total = cartFactory.total;
   });

@@ -48,7 +48,7 @@
                   <input type="number" class="form-control" name="amount" min="1" max="{{product.stock}}" value="{{amount}}" ng-model="amount">
                 </div> 
               </div> 
-              <button type="button" class="btn btn-default" ng-click="addToCart(product.id, amount)">
+              <button type="button" class="btn btn-default" ng-click="addToCart(product.id, amount, product.price)">
                 <span class="glyphicon glyphicon-shopping-cart"></span>
                 ADD TO CART
               </button>

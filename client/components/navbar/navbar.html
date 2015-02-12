@@ -33,26 +33,22 @@
           <ul class="nav navbar-nav navbar-right">
             <!--cart dropdown-->
             <li class="dropdown" on-toggle="toggled(open)">
-              <a href class="dropdown-toggle"><span class="fa fa-shopping-cartCart"></span> [0]<span class="fa fa-caret-down"></span></a>
+              <a href class="dropdown-toggle"><span class="fa fa-shopping-cart"></span> [{{shipCart.length}}] <span class="fa fa-caret-down"></span></a>
               <ul class="dropdown-menu pull-right hcart">
                 <li>
                   <table class="table table-condensed">
-                    <tr>
-                      <td class="text-center">
+                    <tr ng-repeat="item in shipCart">
+                      <td class="text-left">
                         <a href="product.html">
-                          <img class="img-responsive img-thumbnail" src="http://image.eveonline.com/Type/583_32.png" >                              
+                          <img class="img-responsive img-thumbnail" ng-src="http://image.eveonline.com/Type/{{item.id}}_32.png" >                              
                         </a>
                       </td>
                       <td class="text-left">
-                        <a href="product-full.html">
-                          Bantam
-                        </a>
+                        {{item.amount}} x <a href="product-full.html">{{item.id}}</a>
                       </td>
-                      <td class="text-right">x1</td>
-                      <td class="text-right">999.999.999</td>
-                      <td class="text-left">ISK</td>
+                      <td class="text-right">{{item.price * item.amount | number}} ISK</td>
                       <td class="text-center">
-                        <a href="#">
+                        <a href="" ng-click="removeItem(item.id)">
                           <span class="glyphicon glyphicon-remove"></span>
                         </a>
                       </td>
@@ -63,7 +59,7 @@
                   <table class="table total">
                       <tr>
                         <td class="text-right"><strong>Total</strong></td>
-                        <td class="text-left">15.000.000 ISK</td>
+                        <td class="text-left">{{total.total | number}} ISK</td>
                       </tr>
                   </table>
                   <p class="text-right">

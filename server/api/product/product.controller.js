@@ -53,15 +53,11 @@ exports.update = function(req, res) {
 
 // Deletes a product from the DB.
 exports.destroy = function(req, res) {
-  Product.findById(req.params.id, function (err, product) {
+  Product.findByIdAndRemove(req.params.id, function (err, product) {
     if(err) { return handleError(res, err); }
-    if(!product) { return res.send(404); }
-    Product.remove(function(err) {
-      if(err) { return handleError(res, err); }
-      return res.send(204);
-    });
   });
 };
+
 
 function handleError(res, err) {
   return res.send(500, err);

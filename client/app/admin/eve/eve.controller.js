@@ -51,7 +51,7 @@ angular.module('kngfwebshopApp')
 
       // invtypesDesc
       var invTypesDesc = invTypesDescTbl.data[$scope.name][invTypesDescTbl.c.description];
-      console.log(invTypesDescTbl.data[$scope.name][invTypesDescTbl.c.description]) 
+      console.log(invTypesDescTbl.data[$scope.name][invTypesDescTbl.c.description]); 
 
       var test = {
         typeID: typeID,

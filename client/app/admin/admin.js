@@ -13,7 +13,12 @@ angular.module('kngfwebshopApp')
         url: '/admin/products',
         templateUrl: 'app/admin/products/products.html',
         controller: 'ProductsCtrl',
-        authenticate: true
+        authenticate: true,
+        resolve: {
+          productPromise: ['productFactory', function(productFactory){
+              return productFactory.getProducts(); 
+          }]
+        }        
       })
       .state('eve', {
         url: '/admin/eve',

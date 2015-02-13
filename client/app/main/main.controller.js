@@ -23,7 +23,7 @@ angular.module('kngfwebshopApp')
       cartFactory.addToCart(productID, amount, price);
       cartFactory.getData();
       cartFactory.calcTotal();
-      console.log('success')
+      console.log('success');
     };
 
 // mock categories - move to database once admin panel is done.    

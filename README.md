@@ -7,6 +7,9 @@ Latest version can be found live at: http://kngfwebshop.herokuapp.com/
 
 installation instruction:
 clone repo
+
 $ npm install
+
 $ bower install
+
 $ grunt serve

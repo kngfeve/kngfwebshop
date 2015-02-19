@@ -10,7 +10,7 @@ angular.module('kngfwebshopApp')
     _prodFactory.getProducts = function() {
       console.log('_prodFactory.getProducts');
       return $http.get('/api/products').success(function(data){
-        console.log('getting products');
+        console.log(data);
         angular.copy(data, _prodFactory.products);
       });
     };

@@ -14,7 +14,7 @@
 		        </div>      
 		      </div>
 		    </form>
-		    <button class="btn btn-default" ng-click="update()">update</button>
+		    <button class="btn btn-default" ng-click="update(name, sdd)">update</button>
 	    </div>
     <!-- Table -->
 			<div class="container-fluid">
@@ -45,11 +45,15 @@
 			        <div class="col-xs-8">
 								<img class="img-responsive img-thumbnail" ng-src="https://image.eveonline.com/Render/{{eveitem.typeID}}_128.png" title="{{eveitem.typeName}}">
 								<p>{{eveitem.invTypesDesc}}</p>
+		            <button type="submit" class="btn btn-primary" ng-click="saveProduct(eveitem);">
+	            		<i class="fa fa-floppy-o"></i>
+	            		save
+            		</button>
 							</div>
 					    <ul class="list-group col-xs-4">					    	
 				        <li class="list-group-item" style="color: black;" ng-repeat="material in eveitem.materials">
-			        		<img ng-src="https://image.eveonline.com/Type/{{material.materialTypeID}}_32.png" title="{{material.materialTypeName}}">
-				        	{{material.quantity | number}}
+		        			<img ng-src="https://image.eveonline.com/Type/{{material.materialTypeID}}_32.png" title="{{material.materialTypeName}}">
+					        	{{material.quantity | number}}
 			        	</li>
 					    </ul>
 				    </accordion-group>

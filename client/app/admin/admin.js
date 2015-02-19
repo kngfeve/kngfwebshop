@@ -15,8 +15,9 @@ angular.module('kngfwebshopApp')
         controller: 'ProductsCtrl',
         authenticate: true,
         resolve: {
-          productPromise: ['productFactory', function(productFactory){
-              return productFactory.getProducts(); 
+          productPromise: ['productFactory', 'shipFactory', function(productFactory, shipFactory){
+            console.log('running resolve');
+            return productFactory.getProducts() && shipFactory.preLoad();
           }]
         }        
       })

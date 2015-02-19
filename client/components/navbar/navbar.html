@@ -36,11 +36,12 @@
               <a href class="dropdown-toggle"><span class="fa fa-shopping-cart"></span> [{{shipCart.length}}] <span class="fa fa-caret-down"></span></a>
               <ul class="dropdown-menu pull-right hcart">
                 <li>
-                  <table class="table table-condensed">
+                  <p class="text-center" ng-if="shipCart.length === 0">Cart is Empty.</p>
+                  <table class="table table-condensed" ng-if="shipCart.length !== 0">
                     <tr ng-repeat="item in shipCart">
                       <td class="text-left">
                         <a href="product.html">
-                          <img class="img-responsive img-thumbnail" ng-src="http://image.eveonline.com/Type/{{item.id}}_32.png" >                              
+                          <img class="img-responsive img-thumbnail" ng-src="http://image.eveonline.com/Type/{{item.id}}_32.png">                             
                         </a>
                       </td>
                       <td class="text-left">
@@ -55,7 +56,7 @@
                     </tr>
                   </table>
                 </li>
-                <li>
+                <li ng-if="shipCart.length !== 0">
                   <table class="table total">
                       <tr>
                         <td class="text-right"><strong>Total</strong></td>

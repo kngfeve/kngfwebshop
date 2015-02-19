@@ -1,9 +1,7 @@
 'use strict';
 
 angular.module('kngfwebshopApp')
-  .controller('ProductsCtrl', function($scope, $http, Auth, User, productFactory) {
-    
-
+  .controller('ProductsCtrl', function($scope, $http, Auth, User, productFactory, $timeout) {
     $scope.saveProduct = function(data, id) {
       console.log(data);
       if(! id){
@@ -13,7 +11,6 @@ angular.module('kngfwebshopApp')
       if(id){
         productFactory.updateData(id, data);
         console.log('-updated-');
-
       }
     };
 
@@ -39,5 +36,10 @@ angular.module('kngfwebshopApp')
     $scope.editing = false;
     $scope.sortType = 'id';
     // Access the factory and get the latest products list
-  $scope.products = productFactory.products;  
+
+  
+    $scope.products = productFactory.products;  
+     
+
+
   });

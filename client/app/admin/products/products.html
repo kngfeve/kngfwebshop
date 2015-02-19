@@ -24,16 +24,10 @@
 	      </tr>
 	      <tr ng-repeat="p in products | orderBy:sortType:sortReverse">
 	        <td><!-- ID -->
-	          <span ng-show="!editing">{{ p.id || 'empty' }}</span>
-	          <form id="myform" ng-show="editing">
-						    <input id="something" type="text" ng-model="p.id">
-						</form>
+	          <span>{{ p.typeID}}</span>
 	        </td>
 	        <td><!-- Name -->
-	          <span ng-show="!editing">{{p.name}}</span>
-	          <form id="myform" ng-show="editing">
-						    <input id="something" type="text" ng-model="p.name">
-						</form>	          
+	          <span>{{p.typeName}}</span>	          
 	        </td>
 	        <td><!-- Price -->
 	          <span ng-show="!editing">{{ p.price | number}} ISK</span>
@@ -50,25 +44,32 @@
 	        <td style="white-space: nowrap">
 	          <!-- form -->
 	          <form ng-show="editing" class="form-buttons form-inline">
-	            <button type="submit" class="btn btn-primary" ng-click="saveProduct(p, p._id); editing = !editing">save</button>
-	            <button type="button" ng-click="editing = !editing" class="btn btn-default">cancel</button>
+	            <button type="submit" class="btn btn-primary" ng-click="saveProduct(p, p._id); editing = !editing">
+	            	<i class="fa fa-floppy-o"></i>
+	            	save
+            	</button>
+	            <button type="button" ng-click="editing = !editing" class="btn btn-default">
+	            	<i class="fa fa-times"></i>
+	            	cancel
+            	</button>
 	          </form>
 	          <div class="buttons" ng-show="!editing">
-	            <button class="btn btn-primary" ng-click="editing = !editing">edit</button>
-	            <button class="btn btn-danger" ng-click="deleteProduct(p._id, $index)">del</button>
+	            <button class="btn btn-primary" ng-click="editing = !editing">
+	            	<i class="fa fa-pencil"></i>
+	            	edit
+	            </button>
+	            <button class="btn btn-danger" ng-click="deleteProduct(p._id, $index)">
+	            	<i class="fa fa-trash-o"></i></i>
+	            	del
+            	</button>
 	          </div>  
 	        </td>
 	      </tr>
-	      
 	    </table>
 	    <div class="pull-right">
 	      <button class="btn btn-default" ng-click="addProduct()">Add row</button>
 	    </div>  
 	    </div>
-
-	    <!-- Table -->
-
-	  
 	  </div>
   </div>
 </div>

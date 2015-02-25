@@ -7,16 +7,19 @@ angular.module('kngfwebshopApp')
 	    if (!search && !selection) {
 	    	return products;
 	    }
-    	// return products matching the criterias frigates
-	    if (!search && selection.metalevel && selection.type) {	
-	    	return $filter('filter')(products, {metalevel: selection.metalevel, type: selection.type});
-	    }	    	    
+    	// return products matching the criterias
+	    if (!search && selection.category && selection.subcategory) {	
+	    	return $filter('filter')(products, {groupID: selection.category, marketGroupID: selection.subcategory});
+	    }
+
+	    // search	    	    
 	    var arrSearch = search.split(' ');
 	    var lookup = '';
 	    var result = [];	
 
 			arrSearch.forEach(function(item) {
-			  lookup = $filter('filter')(products, {'name': item});
+
+			  lookup = $filter('filter')(products, {typeName: item});
 			  if (lookup.length > 0) {
 					result = result.concat(lookup);
 				}

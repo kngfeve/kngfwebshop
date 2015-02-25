@@ -50,7 +50,6 @@ Product.find({}).remove(function() {
       raceID: "Gallente",
       typeName: "Megathron"      
     }
-
   );
 });
 

@@ -22,5 +22,5 @@ angular.module('kngfwebshopApp')
     };
 
 // mock categories - move to database once admin panel is done.    
-    $scope.categories = productFactory.categories;    
+    $scope.categories = productFactory.categories; 
   });

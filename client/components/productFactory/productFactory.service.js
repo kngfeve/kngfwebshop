@@ -12,7 +12,6 @@ angular.module('kngfwebshopApp')
       for (var i = 0; i < _prodFactory.products.length; i++) {
         // if the category array is empty, add a catagory.
         if (_prodFactory.categories.length === 0) {
-          console.log('array empty')
           _prodFactory.categories.push({
             groupID: _prodFactory.products[i]['groupID'],
             marketGroupID: [_prodFactory.products[i]['marketGroupID']]
@@ -20,16 +19,16 @@ angular.module('kngfwebshopApp')
         };
         // loop over every catagory
         for (var j = 0; j < _prodFactory.categories.length; j++) {
-          console.log("testing " + _prodFactory.categories[j]['groupID'] + " === " + _prodFactory.products[i]['groupID']);
           //if we are at the end of the catagory array, and we still havent found a match, add catagory and subcategory.
           if (_prodFactory.categories[j]['groupID'] === _prodFactory.products[i]['groupID']) {
-            console.log('match');
+            for (var k = 0; k < _prodFactory.categories[j]['marketGroupID'].length; k++) {              
+              if (_prodFactory.categories[j]['marketGroupID'][k] !== _prodFactory.products[i]['marketGroupID']) {
+                _prodFactory.categories[j]['marketGroupID'].push(_prodFactory.products[i]['marketGroupID']);
+              };
+            };
             break;
           };
-          console.log('not a match');
           if (_prodFactory.categories[j]['groupID'] != _prodFactory.products[i]['groupID'] && j === _prodFactory.categories.length-1) {
-            console.log(_prodFactory.products[i]['groupID'] + ' != ' + _prodFactory.categories[j]['groupID']);
-            console.log('not a match, adding');
             _prodFactory.categories.push({
               groupID: _prodFactory.products[i]['groupID'],
               marketGroupID: [_prodFactory.products[i]['marketGroupID']]
@@ -39,6 +38,7 @@ angular.module('kngfwebshopApp')
       };
       return console.log(_prodFactory.categories);
     };
+    
     _prodFactory.getProducts = function() {
       return $http.get('/api/products').success(function(data) {
         angular.copy(data, _prodFactory.products);

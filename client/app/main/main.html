@@ -1,37 +1,42 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <div class="container">
-<!--Navigation-->
+  <!--Navigation-->
   <div class="col-lg-3">
     <form>
       <div class="form-group">
         <div class="input-group">
-          <div class="input-group-addon"><i class="fa fa-search"></i></div>
+          <div class="input-group-addon"><i class="fa fa-search"></i>
+          </div>
           <input type="text" class="form-control" placeholder="Search" ng-model="search">
-        </div>      
+        </div>
       </div>
     </form>
-    <ul class="productmenu">   
+    <ul class="productmenu">
       <li ng-repeat="category in categories">
-        <a href class="" ng-click="isCollapsed = !isCollapsed">{{category.groupID}}
+        <a href class="" ng-click="isCollapsed = !isCollapsed">{{category.groupID}}s
           <span ng-show="isCollapsed" class="pull-right fa fa-caret-down"></span>
           <span ng-hide="isCollapsed" class="pull-right fa fa-caret-down fa-rotate-90"></span>
         </a>
         <ul ng-repeat="marketGroupID in category.marketGroupID" class="productmenu-list" collapse="isCollapsed">
-          <li><a href ng-click="$parent.$parent.selection = {metalevel: subcategory.metalevel, type: subcategory.type}">{{marketGroupID}}</a></li>
+          <li>
+            <a href ng-click="$parent.$parent.selection = {category: category.groupID, subcategory: category.marketGroupID[$index]}; $parent.$parent.search = null;">
+              {{marketGroupID}}
+            </a>
+          </li>
         </ul>
-      </li>  
+      </li>
     </ul>
   </div>
-<!--End navigation-->
+  <!--End navigation-->
 
-<!--Content-->
+  <!--Content-->
   <div class="col-lg-9">
     <div class="panel panel-default" ng-repeat="product in products | orderBy : id | productfilter:search:selection">
       <div class="panel-body row">
         <div class="col-lg-3">
-          <img class="img-thumbnail" width="200px" ng-src="http://image.eveonline.com/Render/{{product.typeID}}_256.png" >      
-        </div> 
+          <img class="img-thumbnail" width="200px" ng-src="http://image.eveonline.com/Render/{{product.typeID}}_256.png">
+        </div>
         <div class="col-lg-9">
           <h4>{{product.typeName}}</h4>
           <p>{{product.invTypesDesc}}</p>
@@ -44,17 +49,16 @@
                 <div class="form-group">
                   <label class="sr-only" for="amount">Amount</label>
                   <input type="number" class="form-control" name="amount" min="1" max="{{product.stock}}" value="{{amount}}" ng-model="amount">
-                </div> 
-              </div> 
+                </div>
+              </div>
               <button type="button" class="btn btn-default" ng-click="addToCart(product.typeID, amount, product.price)">
-                <span class="glyphicon glyphicon-shopping-cart"></span>
-                ADD TO CART
+                <span class="glyphicon glyphicon-shopping-cart"></span> ADD TO CART
               </button>
             </div>
           </form>
-        </div> 
-      </div>    
+        </div>
+      </div>
     </div>
   </div>
-<!--End Content-->  
+  <!--End Content-->
 </div>

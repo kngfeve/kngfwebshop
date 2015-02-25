@@ -55,8 +55,11 @@ angular.module('kngfwebshopApp')
       // invGroups
       var groupName = invGroupsTbl.data[groupID][invGroupsTbl.c.groupName];
 
+      if (chrRacesTbl.data[raceID]){
+        var raceName = chrRacesTbl.data[raceID][chrRacesTbl.c.raceName];
+      } else if (!chrRacesTbl.data[raceID]){ var raceName = 'n/a';}
       //chrRaces
-      var raceName = chrRacesTbl.data[raceID][chrRacesTbl.c.raceName];
+      
 
       // invMarketGroups
       var marketGroupParentID = invMarketGroupsTbl.data[marketGroupID][invMarketGroupsTbl.c.parentGroupID];

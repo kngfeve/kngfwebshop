@@ -21,14 +21,8 @@ angular.module('kngfwebshopApp')
     };  
 
     // add user
-    $scope.addProduct = function() {
-       $scope.inserted = {
-          id: $scope.id,
-          price: $scope.price,
-          stock: $scope.stock,
-      };
-      $scope.products.push($scope.inserted);
-      console.log($scope.inserted);
+    $scope.export = function(products) {
+      window.prompt("Copy to clipboard: Ctrl+C, Enter", JSON.stringify(products));
     };
 
     $scope.sortReverse = false;

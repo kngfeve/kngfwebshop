@@ -1,0 +1,137 @@
+<div ng-include="'components/navbar/navbar2.html'"></div>
+
+<div class="container">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">Load from SDD</div>
+      <div class="panel-body">
+        <form>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-search"></i>
+              </div>
+              <input type="text" class="form-control" placeholder="Search for itemID" ng-model="name" min="582" max="672">
+            </div>
+          </div>
+        </form>
+        <button class="btn btn-default" ng-click="update(name, sdd)">update</button>
+      </div>
+      <!-- Table -->
+      <div class="container-fluid">
+        <accordion close-others="oneAtATime">
+          <accordion-group is-disabled="true" ng-show="eveitems.length">
+            <accordion-heading>
+              <div class="row">
+                <div class="col-xs-2">ID</div>
+                <div class="col-xs-2">Group</div>
+                <div class="col-xs-2">Name</div>
+                <div class="col-xs-2">Race</div>
+                <div class="col-xs-2">Marketgroup</div>
+              </div>
+            </accordion-heading>
+          </accordion-group>
+          <!-- Products from SDD-->
+          <accordion-group is-open="status.open" ng-repeat="eveitem in eveitems">
+            <accordion-heading>
+              <div class="row">
+                <div class="col-xs-2">{{eveitem.typeID}}</div>
+                <div class="col-xs-2">{{eveitem.groupID}}</div>
+                <div class="col-xs-2">{{eveitem.typeName}}</div>
+                <div class="col-xs-2">{{eveitem.raceID}}</div>
+                <div class="col-xs-2">{{eveitem.marketGroupID}}</div>
+                <div class="col-xs-2">
+                  <button ng-hide="checkProducts({{eveitem.typeID}})" type="submit" class="btn btn-primary" ng-click="addProduct(eveitem, $index);">
+                    <i class="fa fa-floppy-o"></i> save to DB
+                  </button>
+                  <span class="pull-right glyphicon" ng-class="{'fa fa-caret-down': status.open, 'fa fa-caret-down fa-rotate-90': !status.open}"></span>
+                </div>
+              </div>
+            </accordion-heading>
+            <div class="col-xs-8">
+              <img class="img-responsive img-thumbnail" ng-src="https://image.eveonline.com/Render/{{eveitem.typeID}}_128.png" title="{{eveitem.typeName}}">
+              <p>{{eveitem.invTypesDesc}}</p>
+            </div>
+            <ul class="list-group col-xs-4">
+              <li class="list-group-item" style="color: black;" ng-repeat="material in eveitem.materials">
+                <img ng-src="https://image.eveonline.com/Type/{{material.materialTypeID}}_32.png" title="{{material.materialTypeName}}"> {{material.quantity | number}}
+              </li>
+            </ul>
+          </accordion-group>
+        </accordion>
+      </div>
+    </div>
+
+<div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">Product Catalog</div>
+      <div class="panel-body">
+        <table class="table table-bordered table-hover table-striped table-responsive">
+          <tr style="font-weight: bold">
+            <th style="width: 5%;" ng-click="sortType = 'typeID'; sortReverse = !sortReverse">
+              Id
+              <span ng-show="sortType == 'typeID' && !sortReverse" class="fa fa-caret-down"></span>
+              <span ng-show="sortType == 'typeID' && sortReverse" class="fa fa-caret-up"></span>
+            </th>
+            <th ng-click="sortType = 'name'; sortReverse = !sortReverse">
+              Name
+              <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+              <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+            </th>
+            <th ng-click="sortType = 'price'; sortReverse = !sortReverse">Price</th>
+            <th ng-click="sortType = 'stock'; sortReverse = !sortReverse">Stock</th>
+            <th style="width: 15%;" ng-click="sortType = 'edit'; sortReverse = !sortReverse">Edit</th>
+          </tr>
+          <tr ng-repeat="p in products | orderBy:sortType:sortReverse">
+            <td>
+              <!-- ID -->
+              <span>{{ p.typeID}}</span>
+            </td>
+            <td>
+              <!-- Name -->
+              <span>{{p.typeName}}</span>
+            </td>
+            <td>
+              <!-- Price -->
+              <span ng-show="!editing">{{ p.price | number}} ISK</span>
+              <form id="myform" ng-show="editing">
+                <input id="something" type="text" ng-model="p.price">
+              </form>
+            </td>
+            <td>
+              <!-- Stock -->
+              <span ng-show="!editing">{{ p.stock || 'empty' }}</span>
+              <form id="myform" ng-show="editing">
+                <input id="something" type="text" ng-model="p.stock">
+              </form>
+            </td>
+            <td style="white-space: nowrap">
+              <!-- form -->
+              <form ng-show="editing" class="form-buttons form-inline">
+                <button type="submit" class="btn btn-primary" ng-click="saveProduct(p, p._id); editing = !editing">
+                  <i class="fa fa-floppy-o"></i> save
+                </button>
+                <button type="button" ng-click="editing = !editing" class="btn btn-default">
+                  <i class="fa fa-times"></i> cancel
+                </button>
+              </form>
+              <div class="buttons" ng-show="!editing">
+                <button class="btn btn-primary" ng-click="editing = !editing">
+                  <i class="fa fa-pencil"></i> edit
+                </button>
+                <button class="btn btn-danger" ng-click="deleteProduct(p._id, $index)">
+                  <i class="fa fa-trash-o"></i></i>
+                  del
+                </button>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <div class="pull-right">
+          <button class="btn btn-default" ng-click="export(products)">Export Json</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

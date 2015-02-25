@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('kngfwebshopApp')
-  .controller('EveCtrl', function($scope, shipFactory, productFactory) {
+  .controller('productCatalogCtrl', function($scope, shipFactory, productFactory) {
     $scope.eveitems = [];
     $scope.sortReverse = false;
     $scope.editing = false;
@@ -44,10 +44,27 @@ angular.module('kngfwebshopApp')
         }
       }
     };
-    $scope.saveProduct = function(eveItem, index) {
+    $scope.addProduct = function(eveItem, index) {
       // need a check for weather the item already exist on the DB
       productFactory.create(eveItem);
       $scope.products.push(eveItem);
       $scope.eveitems.splice(index, 1);
     };
+    $scope.saveProduct = function(data, id) {
+      console.log(data);
+      if(! id){
+        productFactory.create(data);
+        console.log('-created-');   
+      }
+      if(id){
+        productFactory.updateData(id, data);
+        console.log('-updated-');
+      }
+    };
+
+    // remove Product
+    $scope.deleteProduct = function(id){
+      productFactory.deleteData(id);
+      productFactory.getProducts();
+    };      
   });

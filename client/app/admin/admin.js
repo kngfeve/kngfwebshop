@@ -25,6 +25,18 @@ angular.module('kngfwebshopApp')
         url: '/admin/eve',
         templateUrl: 'app/admin/eve/eve.html',
         controller: 'EveCtrl',
-        authenticate: true
+        authenticate: true,
+        resolve: {
+          productPromise: ['productFactory', function(productFactory){
+            return productFactory.getProducts();
+          }]
+        }         
+      })
+      .state('dashboard', {
+        url: '/admin/dashboard',
+        templateUrl: 'app/admin/dashboard/dashboard.html',
+        controller: 'DashboardCtrl',
+        authenticate: true     
       });      
   });
+

@@ -13,12 +13,12 @@
     </form>
     <ul class="productmenu">   
       <li ng-repeat="category in categories">
-        <a href class="" ng-click="isCollapsed = !isCollapsed">{{category.category}}
+        <a href class="" ng-click="isCollapsed = !isCollapsed">{{category.groupID}}
           <span ng-show="isCollapsed" class="pull-right fa fa-caret-down"></span>
           <span ng-hide="isCollapsed" class="pull-right fa fa-caret-down fa-rotate-90"></span>
         </a>
-        <ul ng-repeat="subcategory in category.subcategories" class="productmenu-list" collapse="isCollapsed">
-          <li><a href ng-click="$parent.$parent.selection = {metalevel: subcategory.metalevel, type: subcategory.type}">{{subcategory.subcategory}}</a></li>
+        <ul ng-repeat="marketGroupID in category.marketGroupID" class="productmenu-list" collapse="isCollapsed">
+          <li><a href ng-click="$parent.$parent.selection = {metalevel: subcategory.metalevel, type: subcategory.type}">{{marketGroupID}}</a></li>
         </ul>
       </li>  
     </ul>

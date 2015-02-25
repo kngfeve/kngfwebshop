@@ -8,8 +8,8 @@ angular.module('kngfwebshopApp')
         templateUrl: 'app/main/main.html',
         controller: 'MainCtrl',
       	resolve: {
-  	        cartPromise: ['cartFactory', function(cartFactory){
-  	            return cartFactory.getData(), cartFactory.calcTotal(); 
+  	        cartPromise: ['cartFactory', 'productFactory', function(cartFactory, productFactory){
+  	            return cartFactory.getData(), cartFactory.calcTotal(), productFactory.getProducts(); 
   	        }]
   	    }
       });

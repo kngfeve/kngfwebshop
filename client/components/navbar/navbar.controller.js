@@ -24,7 +24,6 @@ angular.module('kngfwebshopApp')
       cartFactory.removeItem(id);
       cartFactory.getData();
       cartFactory.calcTotal();
-      console.log('finished')
     };
     $scope.shipCart = cartFactory.cart;
     $scope.total = cartFactory.total;

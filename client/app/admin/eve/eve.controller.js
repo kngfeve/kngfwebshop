@@ -1,13 +1,27 @@
 'use strict';
 
 angular.module('kngfwebshopApp')
-  .controller('EveCtrl', function($scope, shipFactory, productFactory) {  
+  .controller('EveCtrl', function($scope, shipFactory, productFactory) {
     $scope.eveitems = [];
-    $scope.name = '641'; 
+    $scope.sortReverse = false;
+    $scope.editing = false;
+    $scope.sortType = 'typeID';
 
-//move to some kind of Provider service
-    var SDD = EVEoj.SDD.Create('json', {'path': 'http://cf.xyjax.com/sdd/109013'});
-    SDD.LoadMeta().then(function(arg){
+    $scope.products = productFactory.products;
+
+    $scope.checkProducts = function(typeID) {
+      for (var i = 0; i < $scope.products.length; i++) {
+        if ($scope.products[i].typeID === typeID) {
+          return true;
+        }
+      }
+      return false;
+    };
+    //move to some kind of Provider service
+    var SDD = EVEoj.SDD.Create('json', {
+      'path': 'http://cf.xyjax.com/sdd/109013'
+    });
+    SDD.LoadMeta().then(function(arg) {
       arg.source.GetTable('invTypes').Load();
       arg.source.GetTable('invGroups').Load();
       arg.source.GetTable('chrRaces').Load();
@@ -15,16 +29,25 @@ angular.module('kngfwebshopApp')
       arg.source.GetTable('invTypesDesc').Load();
       arg.source.GetTable('invMarketGroups').Load();
       $scope.sdd = arg.source;
-    }); 
+      console.log(arg.source.GetTable('invTypes'));
+    });
 
     $scope.update = function(id, sdd) {
-      var test = shipFactory.update(id, sdd);
-      $scope.eveitems.push(test);
-      console.log(test)
+      for (var i = 0; i < $scope.products.length; i++) {
+        if ($scope.products[i].typeID === id) {
+          return;
+        }
+        console.log(i + ' = ' + $scope.products.length);
+        if (i === $scope.products.length -1 && $scope.products[i].typeID !== id) {
+          var test = shipFactory.update(id, sdd);
+          $scope.eveitems.push(test);
+        }
+      }
     };
-    $scope.saveProduct = function(eveItem) {
+    $scope.saveProduct = function(eveItem, index) {
       // need a check for weather the item already exist on the DB
-      console.log(eveItem);
-      //productFactory.create(eveItem);
-    };        
+      productFactory.create(eveItem);
+      $scope.products.push(eveItem);
+      $scope.eveitems.splice(index, 1);
+    };
   });

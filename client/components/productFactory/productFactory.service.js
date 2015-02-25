@@ -1,41 +1,61 @@
 'use strict';
 
 angular.module('kngfwebshopApp')
-  .factory('productFactory', function ($http) {
+  .factory('productFactory', function($http) {
     /** https://docs.angularjs.org/guide/providers **/
     var _prodFactory = {
-      products: []
+      products: [],
+      categories: []
     };
-
+    _prodFactory.getCategories = function() {
+      // loop over every product in DB
+      for (var i = 0; i < _prodFactory.products.length; i++) {
+        // if the category array is empty, add a catagory.
+        if (_prodFactory.categories.length === 0) {
+          console.log('array empty')
+          _prodFactory.categories.push({
+            groupID: _prodFactory.products[i]['groupID'],
+            marketGroupID: [_prodFactory.products[i]['marketGroupID']]
+          });
+        };
+        // loop over every catagory
+        for (var j = 0; j < _prodFactory.categories.length; j++) {
+          console.log("testing " + _prodFactory.categories[j]['groupID'] + " === " + _prodFactory.products[i]['groupID']);
+          //if we are at the end of the catagory array, and we still havent found a match, add catagory and subcategory.
+          if (_prodFactory.categories[j]['groupID'] === _prodFactory.products[i]['groupID']) {
+            console.log('match');
+            break;
+          };
+          console.log('not a match');
+          if (_prodFactory.categories[j]['groupID'] != _prodFactory.products[i]['groupID'] && j === _prodFactory.categories.length-1) {
+            console.log(_prodFactory.products[i]['groupID'] + ' != ' + _prodFactory.categories[j]['groupID']);
+            console.log('not a match, adding');
+            _prodFactory.categories.push({
+              groupID: _prodFactory.products[i]['groupID'],
+              marketGroupID: [_prodFactory.products[i]['marketGroupID']]
+            });
+          };
+        };
+      };
+      return console.log(_prodFactory.categories);
+    };
     _prodFactory.getProducts = function() {
-      console.log('_prodFactory.getProducts');
-      return $http.get('/api/products').success(function(data){
-        console.log(data);
+      return $http.get('/api/products').success(function(data) {
         angular.copy(data, _prodFactory.products);
+        console.log(data);
+        _prodFactory.getCategories();
       });
     };
     _prodFactory.create = function(data) {
       console.log('_prodFactory.create');
-      return $http.post('/api/products', data).success(function(data){
-        console.log(data);
-      });
+      return $http.post('/api/products', data).success(function(data) {});
     };
     _prodFactory.updateData = function(id, data) {
-      console.log('_prodFactory.updateData ' + id);
       return $http.put('/api/products/' + id, data);
-    };    
+    };
 
     _prodFactory.deleteData = function(id) {
-      console.log('_prodFactory.deleteData ' + id);
-      return $http.delete('/api/products/' + id).success(function(data){
-        console.log(data);
-      });
-    };          
+      return $http.delete('/api/products/' + id).success(function(data) {});
+    };
     return _prodFactory;
   });
-
-
-
-
-
-
